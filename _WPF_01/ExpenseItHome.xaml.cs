@@ -26,7 +26,7 @@ namespace _WPF_01
         /// <param name="sender" || "아무 이름이나 괜찮지만 예약어는 안 됨"></param>
         /// <param name="e"></param>
         /// </summary>
-        private void HandleClick(object sender, RoutedEventArgs _event)
+        private void handleClick(object sender, RoutedEventArgs _event)
         {
             // 인스턴스 생성
             ExpenseReportPage expenseReportPage = new ExpenseReportPage();
