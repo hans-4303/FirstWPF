@@ -41,32 +41,42 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <!-- Name -->
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
-                <!-- 라벨 요소와 스타일 명시, StaticResource -->
-                <Label Style="{StaticResource labelStyle}">Name:</Label>
-                <Label Style="{StaticResource labelStyle}"></Label>
-            </StackPanel>
+            <!--Templates to display expense report data-->
+            <Grid.Resources>
+                <!-- Reason item template -->
+                <DataTemplate x:Key="typeItemTemplate">
+                    <Label Content="{Binding XPath=@ExpenseType}"/>
+                </DataTemplate>
+                <!-- Amount item template -->
+                <DataTemplate x:Key="amountItemTemplate">
+                    <Label Content="{Binding XPath=@ExpenseAmount}"/>
+                </DataTemplate>
+            </Grid.Resources>
 
-            <!-- Department -->
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
-            Orientation="Horizontal">
-                <!-- 라벨 요소와 스타일 명시, StaticResource -->
-                <Label Style="{StaticResource labelStyle}">Department:</Label>
-                <Label Style="{StaticResource labelStyle}"></Label>
-            </StackPanel>
-            <!-- 자손 그리드, 시작점과 차지할 칼럼, 로우 명시하고 자식 요소 정렬 명시 -->
+            <!-- Name -->
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
+                    <Label Style="{StaticResource labelStyle}">Name:</Label>
+                    <Label Style="{StaticResource labelStyle}" Content="{Binding XPath=@Name}"></Label>
+                </StackPanel>
+
+                <!-- Department -->
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal">
+                    <Label Style="{StaticResource labelStyle}">Department:</Label>
+                    <Label Style="{StaticResource labelStyle}" Content="{Binding XPath=@Department}"></Label>
+                </StackPanel>
+                <!-- 자손 그리드, 시작점과 차지할 칼럼, 로우 명시하고 자식 요소 정렬 명시 -->
             <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" 
             HorizontalAlignment="Left">
                 <!-- Expense type and Amount table -->
                 <!-- 보통 스타일이 아닌 ColumnHeaderStyle 선언하고 StaticResource 호출 -->
-                <DataGrid ColumnHeaderStyle="{StaticResource columnHeaderStyle}" 
-                    AutoGenerateColumns="False" RowHeaderWidth="0" >
+                <!-- Expense type and Amount table -->
+                <DataGrid ItemsSource="{Binding XPath=Expense}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" AutoGenerateColumns="False" RowHeaderWidth="0" >
+
                     <DataGrid.Columns>
-                        <!-- 실제 적용 부분은 이렇다   -->
-                        <DataGridTextColumn Header="ExpenseType" />
-                        <DataGridTextColumn Header="Amount"  />
+                        <DataGridTemplateColumn Header="ExpenseType" CellTemplate="{StaticResource typeItemTemplate}" />
+                        <DataGridTemplateColumn Header="Amount" CellTemplate="{StaticResource amountItemTemplate}" />
                     </DataGrid.Columns>
+
                 </DataGrid>
             </Grid>
         </Grid>

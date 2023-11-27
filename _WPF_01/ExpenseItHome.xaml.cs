@@ -29,7 +29,8 @@ namespace _WPF_01
         private void handleClick(object sender, RoutedEventArgs _event)
         {
             // 인스턴스 생성
-            ExpenseReportPage expenseReportPage = new ExpenseReportPage();
+            // View Expense Report
+            ExpenseReportPage expenseReportPage = new ExpenseReportPage(this.peopleListBox.SelectedItem);
             this.NavigationService.Navigate(expenseReportPage);
         }
 
