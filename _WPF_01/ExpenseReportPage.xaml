@@ -9,6 +9,89 @@
       Title="ExpenseIt - View Expense">
 
     <Grid>
+        <!-- 배경 그림 -->
+        <Grid.Background>
+            <ImageBrush ImageSource="watermark.png" />
+        </Grid.Background>
+        <!-- Columns와 Rows 정의, 2 * 2로 만들어진다 알 수 있음 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Grid 중 Column="1"에 배치되었음, 역시 인덱스 순 배치로 보임 -->
+        <!-- 이 컨텐츠는 Height: "Auto"로 지정되어 자신의 높이만큼만 영역 차지 -->
+        <Label Grid.Column="1" VerticalAlignment="Center" FontFamily="Trebuchet MS" 
+            FontWeight="Bold" FontSize="18" Foreground="#0066cc">
+            Expense Report For:
+        </Label>
         
+        <!-- Grid.Column은 1로 같지만 Row.definition Height="Auto"를 제외한 나머지 Row 공간을 차지 -->
+        <Grid Margin="10" Grid.Column="1" Grid.Row="1">
+            <!-- Grid 안에서 Grid 재선언, 다시 Columns와 Rows 나눌 수 있음
+            2 * 3으로 분할된 점 파악-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <!-- 여기에서 Height="Auto" 선언되었기 때문에 해당 요소는 컨텐츠 크기만큼을 가짐 -->
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!-- Name -->
+            <!-- 자식 Grid 내에서 시작점 Column, 차지할 ColumnSpan, 시작점 Grid.Row 및
+            자식 요소 간의 수평 <-> 수직 정렬 == flexDirection: row(to column) <-> column(to row) -->
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
+                <Label Margin="0,0,0,5" FontWeight="Bold">Name:</Label>
+                <Label Margin="0,0,0,5" FontWeight="Bold"></Label>
+            </StackPanel>
+
+            <!-- 또 다른 StackPanel, 수직 시작점인 Grid.Row가 다름 -->
+            <!-- Department -->
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal">
+                <Label Margin="0,0,0,5" FontWeight="Bold">Department:</Label>
+                <Label Margin="0,0,0,5" FontWeight="Bold"></Label>
+            </StackPanel>
+
+            <!-- 나머지 공간 차지하는 UI, 시작점은 Grid.Column="0"이며 Grid.ColumnSpan으로 Column 차지
+            Grid.Row="2"이며, Height="Auto" 선언되지 않은 나머지 Row를 차지할 UI
+            VerticalAlignment는 자식 요소가 수직 상 어디에 정렬될지 결정
+            HorizontalAlignment는 자식 요소가 수평 상 어디에 정렬될지 결정
+            Alignment들 속성에서 Stretch를 입력 시 자식 요소가 수직 혹은 수평으로 늘어나며 해당 공간 차지:
+            수직 혹은 수평으로 블록 요소가 된다 볼 수 있음 -->
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" 
+            HorizontalAlignment="Left">
+                <!-- Expense type and Amount table -->
+                <!-- AutoGenerateColumns="False"이므로 칼럼이 자동으로 생성되진 않겠음
+                또한 RowHeaderWidth 값은 반응하지 않았음, 적절한 UI가 따로 있는 듯함 -->
+                <DataGrid  AutoGenerateColumns="False" RowHeaderWidth="0" >
+                    <!-- DataGrid의 ColumnHeaderStyle 작성 -->
+                    <DataGrid.ColumnHeaderStyle>
+                        <!-- 스타일을 줄 수 있는데, 어떤 요소에 줄 것인지 명시해야 함 -->
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <!-- 모두 Setter를 써서 명시함 -->
+                            <Setter Property="Height" Value="35" />
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="Background" Value="#4E87D4" />
+                            <!-- Foreground: 글자색(== HTML의 color) 유사에서 white 값 주기 -->
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <!-- DataGrid.Columns 명시 -->
+                    <DataGrid.Columns>
+                        <!-- DataGridColumn Header 명시함: 덜 직관적이지만 DataGridColumnHeader 타입과 일치하는 걸로 보임 -->
+                        <DataGridTextColumn Header="ExpenseType" />
+                        <DataGridTextColumn Header="Amount"  />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

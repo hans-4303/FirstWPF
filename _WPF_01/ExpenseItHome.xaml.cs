@@ -20,6 +20,19 @@ namespace _WPF_01
     /// </summary>
     public partial class ExpenseItHome : Page
     {
+        /// <summary>
+        /// 파라미터 이름 중 허용 하는 게 있고 그렇지 않은 게 있음
+        /// event를 그대로 쓸 수는 없고, _event로 작성해줄 수는 있음
+        /// <param name="sender" || "아무 이름이나 괜찮지만 예약어는 안 됨"></param>
+        /// <param name="e"></param>
+        /// </summary>
+        private void HandleClick(object sender, RoutedEventArgs _event)
+        {
+            // 인스턴스 생성
+            ExpenseReportPage expenseReportPage = new ExpenseReportPage();
+            this.NavigationService.Navigate(expenseReportPage);
+        }
+
         public ExpenseItHome()
         {
             InitializeComponent();
