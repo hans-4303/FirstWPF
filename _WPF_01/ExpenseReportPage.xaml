@@ -1,4 +1,7 @@
-﻿<Page x:Class="_WPF_01.ExpenseReportPage"
+﻿<!--XAML: XML과 유사한 마크업을 사용하고 UI 구조와 모양 정의
+각 XAML 파일은 Page 요소가 있음
+클래스 속성 x:Class="_WPF_01.ExpenseReportPage": 연결된 코드 비하인드 클래스를 나타냄 -->
+<Page x:Class="_WPF_01.ExpenseReportPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
