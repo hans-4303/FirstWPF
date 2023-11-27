@@ -63,6 +63,7 @@
                 <DataGrid ColumnHeaderStyle="{StaticResource columnHeaderStyle}" 
                     AutoGenerateColumns="False" RowHeaderWidth="0" >
                     <DataGrid.Columns>
+                        <!-- 실제 적용 부분은 이렇다   -->
                         <DataGridTextColumn Header="ExpenseType" />
                         <DataGridTextColumn Header="Amount"  />
                     </DataGrid.Columns>
